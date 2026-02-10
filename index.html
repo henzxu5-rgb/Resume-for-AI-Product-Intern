@@ -1,106 +1,81 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>徐恒泽 | AI Product Intern</title>
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        background: "#020617",
-                        foreground: "#ffffff",
-                        accent: {
-                            DEFAULT: "#8b5cf6",
-                            glow: "#7c3aed",
-                        }
-                    },
-                    animation: {
-                        'blob': 'blob 7s infinite',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                    },
-                    keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              background: "var(--background)",
+              foreground: "var(--foreground)",
+              accent: {
+                DEFAULT: "#8b5cf6", // Violet-500
+                glow: "#7c3aed", // Violet-600
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            animation: {
+              'blob': 'blob 7s infinite',
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+            },
+            keyframes: {
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
             }
-        }
+          },
+        },
+      }
     </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #020617; margin: 0; overflow-x: hidden; }
-        /* 极致原版视觉：毛玻璃与渐变 */
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-        .blob { position: absolute; width: 500px; height: 500px; background: #7c3aed; filter: blur(80px); opacity: 0.2; z-index: -1; border-radius: 50%; }
+      body {
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #3f3f46;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #52525b;
+      }
     </style>
-
-    <script type="importmap">
-    {
-        "imports": {
-            "react": "https://esm.sh/react@18.2.0",
-            "react-dom": "https://esm.sh/react-dom@18.2.0/client",
-            "framer-motion": "https://esm.sh/framer-motion@10.16.4",
-            "lucide-react": "https://esm.sh/lucide-react@0.284.0"
-        }
-    }
-    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
+    "framer-motion": "https://esm.sh/framer-motion@^12.34.0",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  }
+}
+</script>
 </head>
-
-<body class="text-slate-50 antialiased">
-    <div class="blob top-[-10%] left-[-10%] animate-blob"></div>
-    <div class="blob bottom-[-10%] right-[-10%] animate-blob" style="animation-delay: 2s"></div>
-
-    <div id="root">
-        <div class="min-h-screen flex items-center justify-center">
-            <div class="animate-pulse text-violet-400 font-medium">Loading Portfolio...</div>
-        </div>
-    </div>
-
-    <script type="module">
-        import React from 'react';
-        import { createRoot } from 'react-dom';
-        // 如果你原本的代码里有 Framer Motion 逻辑，可以在这里继续扩展
-        
-        const App = () => {
-            return React.createElement('div', { className: 'max-w-4xl mx-auto px-6 py-20 animate-fade-in-up' }, [
-                React.createElement('header', { className: 'mb-16' }, [
-                    React.createElement('h1', { className: 'text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-violet-400' }, '徐恒泽'),
-                    React.createElement('p', { className: 'text-2xl text-violet-400' }, 'AI Product Intern @ 北航')
-                ]),
-                React.createElement('main', { className: 'space-y-8' }, [
-                    React.createElement('div', { className: 'glass p-8 rounded-3xl' }, [
-                        React.createElement('h2', { className: 'text-2xl font-bold mb-4' }, 'DevEcho - 智能化 Agent'),
-                        React.createElement('p', { className: 'text-slate-400 mb-6' }, '基于 VibeCoding 模式构建的反馈处理中心。'),
-                        React.createElement('a', { 
-                            href: 'https://devecho.streamlit.app/', 
-                            className: 'inline-block px-6 py-2 bg-violet-600 rounded-full font-bold hover:scale-105 transition-transform' 
-                        }, '运行 Demo 🚀')
-                    ]),
-                    React.createElement('div', { className: 'glass p-8 rounded-3xl' }, [
-                        React.createElement('h2', { className: 'text-2xl font-bold mb-4' }, '睿察引擎'),
-                        React.createElement('p', { className: 'text-slate-400' }, '首挑一等奖项目：法律大数据 + Prompt Engineering。')
-                    ])
-                ])
-            ]);
-        };
-
-        const root = createRoot(document.getElementById('root'));
-        root.render(React.createElement(App));
-    </script>
-</body>
+  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-300 antialiased selection:bg-violet-500/30">
+    <div id="root"></div>
+  </body>
 </html>
