@@ -1,97 +1,128 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-  <head>
+<html lang="zh-CN" class="dark">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>徐恒泽 | AI Product Intern</title>
+    <title>徐恒泽 | AI Product Intern Portfolio</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
-                }
-            }
+                    colors: {
+                        background: "#020617",
+                        foreground: "#f8fafc",
+                        accent: {
+                            DEFAULT: "#8b5cf6",
+                            glow: "#7c3aed",
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            },
         }
-    </script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              background: "var(--background)",
-              foreground: "var(--foreground)",
-              accent: {
-                DEFAULT: "#8b5cf6", // Violet-500
-                glow: "#7c3aed", // Violet-600
-              }
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-            animation: {
-              'blob': 'blob 7s infinite',
-              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-            },
-            keyframes: {
-              blob: {
-                '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                '100%': { transform: 'translate(0px, 0px) scale(1)' },
-              },
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              }
-            }
-          },
-        },
-      }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        overflow-x: hidden;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #3f3f46;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #52525b;
-      }
+        body { font-family: 'Inter', sans-serif; background-color: #020617; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); }
+        .bg-blob { position: fixed; width: 500px; height: 500px; filter: blur(80px); z-index: -1; opacity: 0.15; }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
-    "framer-motion": "https://esm.sh/framer-motion@^12.34.0",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
-  }
-}
-</script>
 </head>
-  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-300 antialiased selection:bg-violet-500/30">
-    <div id="root"></div>
-  <script>
-    // 强制显现逻辑：如果 2 秒后页面还是白屏，强制显示
-    setTimeout(() => {
-        const body = document.body;
-        body.style.opacity = "1";
-        body.style.visibility = "visible";
-        console.log("Forced visibility triggered.");
-    }, 2000);
-  </script>
-  </body>
+<body class="text-slate-50 antialiased overflow-x-hidden">
+    <div class="bg-blob bg-purple-600 top-0 -left-20 animate-blob"></div>
+    <div class="bg-blob bg-blue-600 bottom-0 -right-20 animate-blob" style="animation-delay: 2s;"></div>
+
+    <div class="max-w-4xl mx-auto px-6 py-20 relative">
+        <header class="mb-20 animate-fade-in-up">
+            <h1 class="text-5xl font-bold mb-4 tracking-tight">徐恒泽</h1>
+            <p class="text-xl text-violet-400 font-medium mb-8">北京航空航天大学 · AI 产品经理实习生</p>
+            <div class="flex flex-wrap gap-4">
+                <a href="https://devecho.streamlit.app/" target="_blank" class="px-8 py-3 bg-violet-600 hover:bg-violet-700 rounded-full font-bold transition-all shadow-lg shadow-violet-500/20">运行 DevEcho Demo 🚀</a>
+                <a href="mailto:X@buaa.edu.cn" class="px-8 py-3 glass-card hover:bg-white/5 rounded-full font-bold transition-all">联系我</a>
+            </div>
+        </header>
+
+        <section class="space-y-12 animate-fade-in-up" style="animation-delay: 0.2s;">
+            <h2 class="text-2xl font-bold border-l-4 border-violet-500 pl-4">核心项目实践</h2>
+            
+            <div class="glass-card p-8 rounded-3xl group">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2 group-hover:text-violet-400 transition">DevEcho - 开发者反馈智能化处理 Agent</h3>
+                        <p class="text-slate-400">独立个人项目 | 2026.02</p>
+                    </div>
+                    <span class="px-4 py-1 bg-violet-500/10 border border-violet-500/20 text-violet-400 rounded-full text-xs font-bold uppercase tracking-wider">MVP Built</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed mb-6">
+                    运用 **VibeCoding** 模式独立构建，解决了开发者在长文本反馈中的优先级识别难题。引入 **RICE 模型** 实现了 81,000 分值的量化评估体系，通过 Streamlit 快速完成交付。
+                </p>
+                <div class="flex gap-3 text-xs font-mono text-slate-500">
+                    <span>#Python</span> <span>#RICE_Model</span> <span>#Prompt_Eng</span> <span>#LLM</span>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl group">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-400 transition">睿察引擎 - 大数据法律检察 AI 智能系统</h3>
+                        <p class="text-slate-400">2025 首挑一等奖 | 产品定义与 Prompt 调试</p>
+                    </div>
+                </div>
+                <p class="text-slate-300 leading-relaxed mb-6">
+                    将“检察官专业思维”抽象为“提取-检索-推理-整合”工作流，通过三层提示工程框架，使通用模型初步具备专业法律推理能力，有效抑制输出随机性。
+                </p>
+                <div class="flex gap-3 text-xs font-mono text-slate-500">
+                    <span>#逻辑建模</span> <span>#结构化PRD</span> <span>#Badcase分析</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-20 grid md:grid-cols-2 gap-8 animate-fade-in-up" style="animation-delay: 0.4s;">
+            <div class="glass-card p-8 rounded-3xl">
+                <h4 class="text-lg font-bold mb-4 text-violet-400 italic">AI Native 思维</h4>
+                <p class="text-sm text-slate-400 leading-relaxed">
+                    法学逻辑建模背景，擅长复杂业务抽象。能熟练运用大模型辅助完成从需求定义、Prompt 调优到 MVP 构建的全链路闭环。
+                </p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl">
+                <h4 class="text-lg font-bold mb-4 text-blue-400 italic">技术理解与自驱动</h4>
+                <p class="text-sm text-slate-400 leading-relaxed">
+                    熟悉 LLM 原理及 RAG 架构，具备极强的自驱动学习能力，能独立解决前端部署与自动化流程中的技术障碍。
+                </p>
+            </div>
+        </section>
+
+        <footer class="mt-32 text-center text-slate-600 text-sm">
+            <p>© 2026 徐恒泽 | Powered by AI Native Strategy</p>
+        </footer>
+    </div>
+
+    <script>
+        // 极致兼容性：确保页面加载时所有动画类都能被识别
+        window.addEventListener('load', () => {
+            document.body.style.opacity = "1";
+        });
+    </script>
+</body>
 </html>
