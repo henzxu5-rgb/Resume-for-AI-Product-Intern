@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Sparkles, Bot } from 'lucide-react';
+import { MessageSquare, X, Send, Sparkles, Bot, AlertCircle } from 'lucide-react';
 import { sendMessageToGemini } from '../services/geminiService';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -12,7 +12,7 @@ interface Message {
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: 'welcome', sender: 'bot', text: "你好！我是徐恒泽的数字分身。欢迎询问关于我的项目、技能或背景的任何问题。" }
+    { id: 'welcome', sender: 'bot', text: "你好！我是徐恒泽的数字分身（演示版）。\n目前我处于离线模式，你可以点击下方的标签快速了解我。" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -26,10 +26,19 @@ const ChatWidget: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+  // Quick questions for the demo mode
+  const suggestions = [
+    "你的核心优势是什么？",
+    "介绍一下你的项目经历",
+    "你会哪些技术栈？",
+    "如何联系你？"
+  ];
 
-    const userMsg: Message = { id: Date.now().toString(), sender: 'user', text: input };
+  const handleSend = async (textOverride?: string) => {
+    const textToSend = textOverride || input;
+    if (!textToSend.trim()) return;
+
+    const userMsg: Message = { id: Date.now().toString(), sender: 'user', text: textToSend };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsLoading(true);
@@ -39,7 +48,7 @@ const ChatWidget: React.FC = () => {
       const botMsg: Message = { id: (Date.now() + 1).toString(), sender: 'bot', text: responseText };
       setMessages(prev => [...prev, botMsg]);
     } catch (error) {
-      setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'bot', text: "抱歉，我无法处理该请求。" }]);
+      setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'bot', text: "抱歉，系统出现错误。" }]);
     } finally {
       setIsLoading(false);
     }
@@ -61,18 +70,21 @@ const ChatWidget: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="mb-4 w-[350px] md:w-[400px] h-[500px] bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            className="mb-4 w-[350px] md:w-[400px] h-[550px] bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Header */}
             <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-violet-500/5 dark:bg-violet-500/10">
               <div className="flex items-center gap-2">
                 <div className="relative">
-                  <div className="w-2 h-2 bg-green-500 rounded-full absolute bottom-0 right-0 border border-white dark:border-slate-900"></div>
+                  <div className="w-2 h-2 bg-amber-400 rounded-full absolute bottom-0 right-0 border border-white dark:border-slate-900"></div>
                   <Sparkles className="w-5 h-5 text-violet-500" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm dark:text-white">AI 助手</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Powered by Gemini</p>
+                  <h3 className="font-semibold text-sm dark:text-white flex items-center gap-2">
+                    AI 助手 
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 font-medium">Demo</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">离线预留模式 (Offline)</p>
                 </div>
               </div>
               <div className="flex gap-2">
@@ -93,7 +105,7 @@ const ChatWidget: React.FC = () => {
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] rounded-2xl p-3 text-sm leading-relaxed ${
+                    className={`max-w-[85%] rounded-2xl p-3 text-sm leading-relaxed whitespace-pre-wrap ${
                       msg.sender === 'user'
                         ? 'bg-violet-600 text-white rounded-tr-none'
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-none border border-slate-200 dark:border-slate-700'
@@ -120,6 +132,19 @@ const ChatWidget: React.FC = () => {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Suggestion Chips */}
+            <div className="px-4 py-2 flex gap-2 overflow-x-auto no-scrollbar mask-gradient">
+                {suggestions.map((s, i) => (
+                    <button
+                        key={i}
+                        onClick={() => handleSend(s)}
+                        className="flex-shrink-0 text-xs px-3 py-1.5 rounded-full bg-violet-50 dark:bg-violet-900/20 text-violet-600 dark:text-violet-300 border border-violet-100 dark:border-violet-500/20 hover:bg-violet-100 dark:hover:bg-violet-800/30 transition-colors whitespace-nowrap"
+                    >
+                        {s}
+                    </button>
+                ))}
+            </div>
+
             {/* Input */}
             <div className="p-3 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex gap-2">
               <input
@@ -127,11 +152,11 @@ const ChatWidget: React.FC = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="询问关于我的经历..."
+                placeholder="发送预设问题..."
                 className="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50"
               />
               <button
-                onClick={handleSend}
+                onClick={() => handleSend()}
                 disabled={!input.trim() || isLoading}
                 className="p-2 bg-violet-600 hover:bg-violet-700 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >

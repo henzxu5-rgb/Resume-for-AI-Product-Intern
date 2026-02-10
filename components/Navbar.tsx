@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/70 dark:bg-slate-950/70 backdrop-blur-md border-b border-slate-200 dark:border-white/5 py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
         <div className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
-          XH<span className="text-violet-500">.</span>
+          Henz Xu resume web<span className="text-violet-500">.</span>
         </div>
         
         <button
