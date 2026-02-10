@@ -84,5 +84,14 @@
 </head>
   <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-300 antialiased selection:bg-violet-500/30">
     <div id="root"></div>
+  <script>
+    // 强制显现逻辑：如果 2 秒后页面还是白屏，强制显示
+    setTimeout(() => {
+        const body = document.body;
+        body.style.opacity = "1";
+        body.style.visibility = "visible";
+        console.log("Forced visibility triggered.");
+    }, 2000);
+  </script>
   </body>
 </html>
