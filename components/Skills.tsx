@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { RESUME_DATA } from '../constants';
-import { BrainCircuit, PenTool, Globe, Zap, GitBranch, Cpu, Layout } from 'lucide-react';
+import { Globe, Zap, GitBranch, Cpu, Layout } from 'lucide-react';
 
 const Skills: React.FC = () => {
   const categoryMap: Record<string, string> = {
@@ -39,7 +39,7 @@ const Skills: React.FC = () => {
         </motion.div>
 
         <div className="flex flex-col gap-24">
-          {['AI', 'Product', 'Language'].map((cat, catIndex) => {
+          {['AI', 'Product', 'Language'].map((cat) => {
             const catSkills = RESUME_DATA.skills.filter(s => s.category === cat);
             if (catSkills.length === 0) return null;
 

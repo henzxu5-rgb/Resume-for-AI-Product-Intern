@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Sparkles, Bot, AlertCircle } from 'lucide-react';
+import { MessageSquare, X, Send, Sparkles, Bot } from 'lucide-react';
 import { sendMessageToGemini } from '../services/geminiService';
 import { AnimatePresence, motion } from 'framer-motion';
 
