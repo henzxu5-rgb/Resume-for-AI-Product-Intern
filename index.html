@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>徐恒泽 | AI Product Intern</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
     <script>
       tailwind.config = {
         darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              background: "var(--background)",
-              foreground: "var(--foreground)",
+              background: "#020617", // 修正你原代码中未定义的 var(--background)
+              foreground: "#ffffff",
               accent: {
-                DEFAULT: "#8b5cf6", // Violet-500
-                glow: "#7c3aed", // Violet-600
+                DEFAULT: "#8b5cf6",
+                glow: "#7c3aed",
               }
             },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
+            fontFamily: { sans: ['Inter', 'sans-serif'] },
             animation: {
               'blob': 'blob 7s infinite',
               'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
@@ -41,41 +42,108 @@
         },
       }
     </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        overflow-x: hidden;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #3f3f46;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #52525b;
-      }
+      body { font-family: 'Inter', sans-serif; overflow-x: hidden; background-color: #020617; }
+      .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
-    "framer-motion": "https://esm.sh/framer-motion@^12.34.0",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
-  }
-}
-</script>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "lucide-react": "https://esm.sh/lucide-react@0.400.0",
+        "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
+        "framer-motion": "https://esm.sh/framer-motion@11.0.0",
+        "react": "https://esm.sh/react@19.0.0",
+        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client"
+      }
+    }
+    </script>
 </head>
-  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-300 antialiased selection:bg-violet-500/30">
+
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-300 antialiased">
+    <div class="fixed inset-0 overflow-hidden -z-10">
+      <div class="absolute top-0 -left-4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+      <div class="absolute top-0 -right-4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" style="animation-delay: 2s"></div>
+    </div>
+
     <div id="root"></div>
-  </body>
+
+    <script type="text/babel" data-type="module">
+      import React from 'react';
+      import { createRoot } from 'react-dom/client';
+      import { motion } from 'framer-motion';
+      import { Rocket, Mail, Github, Linkedin, ExternalLink, Shield, Zap, ChevronRight } from 'lucide-react';
+
+      const App = () => {
+        return (
+          <div className="min-h-screen">
+            <nav className="fixed top-0 w-full z-50 glass border-b border-white/5">
+              <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+                <span className="font-bold tracking-tighter text-xl">XZ.</span>
+                <div className="flex gap-6 text-sm font-medium">
+                  <a href="#projects" className="hover:text-violet-400 transition">项目</a>
+                  <a href="mailto:X@buaa.edu.cn" className="hover:text-violet-400 transition">联系</a>
+                </div>
+              </div>
+            </nav>
+
+            <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
+              <motion.section 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-24"
+              >
+                <h1 className="text-7xl font-black mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white via-violet-200 to-slate-500">
+                  徐恒泽
+                </h1>
+                <p className="text-2xl text-violet-400 font-medium mb-8">AI Product Intern @ 北航</p>
+                <div className="flex gap-4">
+                   <button className="px-8 py-3 bg-violet-600 rounded-full font-bold hover:bg-violet-700 transition shadow-lg shadow-violet-500/20">Resume</button>
+                   <button className="px-8 py-3 glass rounded-full font-bold hover:bg-white/5 transition">Contact</button>
+                </div>
+              </motion.section>
+
+              <div id="projects" className="space-y-12">
+                <h2 className="text-3xl font-bold mb-8">精选项目</h2>
+                
+                {/* DevEcho Card */}
+                <motion.div whileHover={{ y: -5 }} className="glass p-8 rounded-[2rem] group relative overflow-hidden">
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2 group-hover:text-violet-400 transition">DevEcho</h3>
+                      <p className="text-slate-400 leading-relaxed">基于 VibeCoding 模式构建的 AI 反馈处理 Agent。引入 RICE 模型进行需求优先级量化，展现了完整的产品闭环思维。</p>
+                    </div>
+                    <div className="p-3 bg-violet-500/10 rounded-2xl text-violet-400"><Zap /></div>
+                  </div>
+                  <a href="https://devecho.streamlit.app/" target="_blank" className="inline-flex items-center gap-2 text-sm font-bold text-violet-400 group-hover:gap-3 transition-all">
+                    LIVE DEMO <ChevronRight size={16} />
+                  </a>
+                </motion.div>
+
+                {/* 睿察 Card */}
+                <motion.div whileHover={{ y: -5 }} className="glass p-8 rounded-[2rem] group">
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-400 transition">睿察引擎</h3>
+                      <p className="text-slate-400 leading-relaxed">全国“挑战杯”一等奖项目。负责法律 AI 逻辑建模，通过多层级 Prompt Engineering 实现法律文书的高精度解析。</p>
+                    </div>
+                    <div className="p-3 bg-blue-500/10 rounded-2xl text-blue-400"><Shield /></div>
+                  </div>
+                </motion.div>
+              </div>
+            </main>
+          </div>
+        );
+      };
+
+      const container = document.getElementById('root');
+      const root = createRoot(container);
+      root.render(<App />);
+    </script>
+</body>
 </html>
